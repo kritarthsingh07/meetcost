@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [token]);
 
   const login = async (email, password) => {
     // ✅ UPDATED API URL

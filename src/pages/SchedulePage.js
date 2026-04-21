@@ -4,8 +4,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { format, isPast, differenceInMinutes } from 'date-fns';
 import { useCurrency, CURRENCIES } from '../hooks/useCurrency';
+const API_URL = process.env.REACT_APP_API_URL;
 
-const COLORS = ['#a78bfa','#f472b6','#34d399','#fbbf24','#f87171','#60a5fa'];
+//const COLORS = ['#a78bfa','#f472b6','#34d399','#fbbf24','#f87171','#60a5fa'];
 
 export default function SchedulePage() {
   const { fmt, toUSD, currency } = useCurrency();
@@ -20,7 +21,7 @@ export default function SchedulePage() {
   const sym = CURRENCIES[currency]?.symbol || '$';
 
   useEffect(() => {
-    axios.get('/api/schedule')
+    axios.get(`${API_URL}/api/schedule`)
       .then(r => setScheduled(r.data.scheduled || []))
       .catch(() => toast.error('Failed to load schedule'))
       .finally(() => setLoading(false));
@@ -33,27 +34,51 @@ export default function SchedulePage() {
   };
 
   const save = async () => {
-    if (!form.title.trim() || !form.date || !form.time) { toast.error('Fill title, date and time'); return; }
-    const dt = new Date(`${form.date}T${form.time}`);
-    if (isNaN(dt.getTime())) { toast.error('Invalid date/time'); return; }
-    setSaving(true);
-    try {
-      const r = await axios.post('/api/schedule', {
-        title: form.title.trim(), date: dt.toISOString(),
-        duration: parseInt(form.dur) || 30,
-        members: members.map(m => ({ name: m.name, ratePerMin: m.rateUSD }))
-      });
-      setScheduled(ss => [...ss, r.data.scheduled].sort((a,b) => new Date(a.date)-new Date(b.date)));
-      setForm({ title:'', date:'', time:'', dur:'30' });
-      setMembers([]); setShowForm(false);
-      toast.success('Meeting scheduled!');
-    } catch (e) { toast.error(e.response?.data?.message || 'Failed to save'); }
-    finally { setSaving(false); }
-  };
+  if (!form.title.trim() || !form.date || !form.time) {
+    toast.error('Fill title, date and time');
+    return;
+  }
+
+  const dt = new Date(`${form.date}T${form.time}`);
+  if (isNaN(dt.getTime())) {
+    toast.error('Invalid date/time');
+    return;
+  }
+
+  setSaving(true);
+
+  try {
+    const r = await axios.post(`${API_URL}/api/schedule`, {
+      title: form.title.trim(),
+      date: dt.toISOString(),
+      duration: parseInt(form.dur) || 30,
+      members: members.map(m => ({
+        name: m.name,
+        ratePerMin: m.rateUSD
+      }))
+    });
+
+    setScheduled(ss =>
+      [...ss, r.data.scheduled].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      )
+    );
+
+    setForm({ title: '', date: '', time: '', dur: '30' });
+    setMembers([]);
+    setShowForm(false);
+
+    toast.success('Meeting scheduled!');
+  } catch (e) {
+    toast.error(e.response?.data?.message || 'Failed to save');
+  } finally {
+    setSaving(false);
+  }
+};
 
   const remove = async (id) => {
     try {
-      await axios.delete(`/api/schedule/${id}`);
+      await axios.delete(`${API_URL}/api/schedule/${id}`);
       setScheduled(ss => ss.filter(s => s._id !== id));
       toast.success('Removed');
     } catch { toast.error('Failed to remove'); }
