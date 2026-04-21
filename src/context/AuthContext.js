@@ -3,6 +3,9 @@ import axios from 'axios';
 
 const AuthContext = createContext(null);
 
+// ✅ Base API URL from .env
+const API_URL = process.env.REACT_APP_API_URL;
+
 export function AuthProvider({ children }) {
   const [user, setUser]     = useState(null);
   const [token, setToken]   = useState(() => localStorage.getItem('mc_token'));
@@ -11,7 +14,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      axios.get('/api/auth/me')
+
+      // ✅ UPDATED API URL
+      axios.get(`${API_URL}/api/auth/me`)
         .then(r => setUser(r.data.user))
         .catch(() => logout())
         .finally(() => setLoading(false));
@@ -21,27 +26,34 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const r = await axios.post('/api/auth/login', { email, password });
+    // ✅ UPDATED API URL
+    const r = await axios.post(`${API_URL}/api/auth/login`, { email, password });
+
     const { token: t, user: u } = r.data;
     localStorage.setItem('mc_token', t);
     axios.defaults.headers.common['Authorization'] = `Bearer ${t}`;
-    setToken(t); setUser(u);
+    setToken(t); 
+    setUser(u);
     return u;
   };
 
   const register = async (name, email, password) => {
-    const r = await axios.post('/api/auth/register', { name, email, password });
+    // ✅ UPDATED API URL
+    const r = await axios.post(`${API_URL}/api/auth/register`, { name, email, password });
+
     const { token: t, user: u } = r.data;
     localStorage.setItem('mc_token', t);
     axios.defaults.headers.common['Authorization'] = `Bearer ${t}`;
-    setToken(t); setUser(u);
+    setToken(t); 
+    setUser(u);
     return u;
   };
 
   const logout = () => {
     localStorage.removeItem('mc_token');
     delete axios.defaults.headers.common['Authorization'];
-    setToken(null); setUser(null);
+    setToken(null); 
+    setUser(null);
   };
 
   return (

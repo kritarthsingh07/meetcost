@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import './AuthPage.css';
 
+
 export default function AuthPage() {
   const [mode, setMode]       = useState('login');
   const [form, setForm]       = useState({ name: '', email: '', password: '' });
