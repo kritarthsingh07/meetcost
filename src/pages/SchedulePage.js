@@ -6,7 +6,7 @@ import { format, isPast, differenceInMinutes } from 'date-fns';
 import { useCurrency, CURRENCIES } from '../hooks/useCurrency';
 const API_URL = process.env.REACT_APP_API_URL;
 
-//const COLORS = ['#a78bfa','#f472b6','#34d399','#fbbf24','#f87171','#60a5fa'];
+
 
 export default function SchedulePage() {
   const { fmt, toUSD, currency } = useCurrency();
