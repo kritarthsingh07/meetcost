@@ -1,33 +1,21 @@
 :root {
-  /* 🔥 Softer modern dark theme */
-  --bg:       #0b0c10;
-  --surface:  #12141a;
-  --surface2: #171923;
-  --surface3: #1d2030;
+  --bg:       #10131a;
+  --surface:  #171a24;
+  --surface2: #1f2330;
+  --surface3: #262b3d;
 
-  /* subtle borders */
-  --border:   rgba(255,255,255,0.05);
+  --border:   rgba(255,255,255,0.06);
 
-  /* 🎨 refined accent colors */
-  --accent:   #8b8cf5;   /* soft indigo */
-  --accent2:  #ec8cff;   /* soft pink */
-  --accent3:  #4ade80;   /* soft green */
+  --accent:   #7c9cff;   /* blue (clean modern) */
+  --accent2:  #ff8fa3;   /* coral */
+  --accent3:  #3ddc97;   /* mint green */
 
-  --warn:     #facc15;
-  --danger:   #fb7185;
+  --warn:     #fbbf24;
+  --danger:   #ff6b6b;
 
-  /* ✨ improved text colors */
-  --text:     #e6e7ee;
-  --muted:    #9aa0b5;
+  --text:     #e8ebf5;
+  --muted:    #9ca3af;
 
-  /* fonts */
-  --font-display: 'Poppins', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
-
-  --radius:   14px;
-
-  /* softer shadow */
   --shadow:   0 12px 32px rgba(0,0,0,0.4);
 }
 
@@ -131,4 +119,8 @@ body::before {
   .btn-sm {
     width: 100%;
   }
+}
+
+body {
+  border: 3px solid red;
 }
