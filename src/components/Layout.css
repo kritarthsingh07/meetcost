@@ -29,7 +29,7 @@
 .logo-icon {
   width: 34px;
   height: 34px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  background: var(--accent);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -70,9 +70,9 @@
 }
 .nav-item:hover { background: var(--surface2); color: var(--text); }
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(244,114,182,0.08));
+  background: rgba(124,156,255,0.12);
   color: var(--accent);
-  border: 1px solid rgba(167,139,250,0.2);
+  border: 1px solid rgba(124,156,255,0.25);
 }
 
 .nav-icon {
@@ -217,9 +217,8 @@
 
 .card:hover {
   transform: translateY(-2px);
-  border-color: rgba(167,139,250,0.3);
+  border-color: rgba(124,156,255,0.25);
 }
-
 /* STAT CARDS */
 .stat-grid {
   display: grid;
@@ -269,7 +268,10 @@
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(167,139,250,0.12); }
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124,156,255,0.15);
+}
 .input::placeholder { color: var(--muted); }
 select.input option { background: var(--surface); }
 
@@ -290,7 +292,7 @@ select.input option { background: var(--surface); }
 }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  background: var(--accent);
   color: white;
 }
 .btn-primary:not(:disabled):hover { opacity: 0.88; transform: translateY(-1px); }
