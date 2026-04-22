@@ -15,6 +15,7 @@
   flex-shrink: 0;
   overflow: hidden;
   z-index: 10;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.3);
 }
 
 .sidebar-logo {
@@ -177,9 +178,11 @@
 .main-content {
   flex: 1;
   overflow-y: auto;
-  overflow-x: hidden;
   padding: 32px 36px;
   background: var(--bg);
+
+  max-width: 1200px;  
+  margin: 0 auto;
 }
 
 /* ── SHARED PAGE STYLES ── */
@@ -200,24 +203,21 @@
 }
 
 /* CARDS */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px;
-}
+
 .card-sm { padding: 16px; }
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 22px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25); /* 👈 ADD */
   transition: all 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(124,156,255,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
 }
 /* STAT CARDS */
 .stat-grid {
@@ -383,7 +383,7 @@ select.input option { background: var(--surface); }
     height: auto;
   }
 
-  /* 👉 Sidebar becomes TOP NAV BAR */
+  
   .sidebar {
     width: 100%;
     height: auto;
@@ -395,7 +395,7 @@ select.input option { background: var(--surface); }
   }
 
   .sidebar-logo {
-    display: none; /* hide logo on mobile */
+    display: none; 
   }
 
   .sidebar-nav {
@@ -415,17 +415,17 @@ select.input option { background: var(--surface); }
     font-size: 16px;
   }
 
-  /* 👉 MAIN CONTENT FIX */
+  
   .main-content {
     padding: 16px;
   }
 
-  /* 👉 FIX CARD WIDTH */
+  
   .card {
     width: 100%;
   }
 
-  /* 👉 FIX GRID STACKING */
+  
   .stat-grid {
     grid-template-columns: 1fr;
   }

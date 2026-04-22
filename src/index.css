@@ -6,9 +6,9 @@
 
   --border:   rgba(255,255,255,0.06);
 
-  --accent:   #7c9cff;   /* blue (clean modern) */
-  --accent2:  #ff8fa3;   /* coral */
-  --accent3:  #3ddc97;   /* mint green */
+  --accent:   #7c9cff;
+  --accent2:  #ff8fa3;
+  --accent3:  #3ddc97;
 
   --warn:     #fbbf24;
   --danger:   #ff6b6b;
@@ -17,8 +17,14 @@
   --muted:    #9ca3af;
 
   --shadow:   0 12px 32px rgba(0,0,0,0.4);
+
+  /* ✅ ADD missing fonts */
+  --font-display: 'Poppins', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
 }
 
+/* RESET */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -29,29 +35,30 @@ html {
   scroll-behavior: smooth;
 }
 
+/* BASE */
 body {
-  /* 🔥 gradient background (more premium) */
   background: radial-gradient(circle at 20% 20%, #151726, #0b0c10);
   color: var(--text);
 
   font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.6;
-
   letter-spacing: -0.01em;
 
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+
+  overflow-x: hidden; /* ✅ prevent horizontal scroll */
 }
 
-/* 🔥 Better heading feel */
+/* HEADINGS */
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
   font-weight: 600;
 }
 
-/* Scrollbar */
+/* SCROLLBAR */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -63,12 +70,12 @@ h1, h2, h3, h4, h5 {
   border-radius: 2px;
 }
 
-/* Selection */
+/* TEXT SELECTION */
 ::selection {
-  background: rgba(139,140,245,0.25);
+  background: rgba(124,156,255,0.25);
 }
 
-/* 🔥 Softer noise texture (more subtle) */
+/* BACKGROUND NOISE */
 body::before {
   content: '';
   position: fixed;
@@ -78,6 +85,12 @@ body::before {
   z-index: 9999;
   opacity: 0.15;
 }
+
+/* GLOBAL FIXES */
+.sidebar {
+  position: relative;
+}
+
 /* 📱 MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
 
@@ -85,7 +98,7 @@ body::before {
     font-size: 13px;
   }
 
-  /* Page container spacing */
+  /* Page header */
   .page-header {
     padding: 12px;
   }
@@ -98,32 +111,21 @@ body::before {
     font-size: 12px;
   }
 
-  /* Buttons full width on mobile */
-  .btn {
+  /* Buttons */
+  .btn,
+  .btn-sm {
     width: 100%;
     justify-content: center;
   }
 
-  /* Cards spacing */
+  /* Cards */
   .card {
     padding: 14px;
   }
 
-  /* Inputs better spacing */
+  /* Inputs */
   .input {
     font-size: 14px;
     padding: 10px;
   }
-}
-@media (max-width: 768px) {
-  .btn-sm {
-    width: 100%;
-  }
-}
-
-body {
-  overflow-x: hidden;
-}
-.sidebar {
-  position: relative;
 }
