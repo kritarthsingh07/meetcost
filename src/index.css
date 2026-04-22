@@ -1,131 +1,122 @@
 :root {
-  --bg:       #10131a;
-  --surface:  #171a24;
-  --surface2: #1f2330;
-  --surface3: #262b3d;
+  /* 🌙 BACKGROUND */
+  --bg: #0a0c13;
+  --bg-gradient: radial-gradient(circle at 20% 10%, #1a1f3a, #0a0c13);
 
-  --border:   rgba(255,255,255,0.06);
+  /* 🧱 SURFACES (GLASS STYLE) */
+  --surface: rgba(255,255,255,0.04);
+  --surface2: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.08);
 
-  --accent:   #7c9cff;
-  --accent2:  #ff8fa3;
-  --accent3:  #3ddc97;
+  /* 🎨 ACCENTS (SOFT PREMIUM) */
+  --accent: #7c9cff;
+  --accent2: #ff9ecb;
+  --accent3: #4ade80;
 
-  --warn:     #fbbf24;
-  --danger:   #ff6b6b;
+  /* TEXT */
+  --text: #e8ebf5;
+  --muted: #9aa0b5;
 
-  --text:     #e8ebf5;
-  --muted:    #9ca3af;
+  /* UI */
+  --radius: 16px;
+  --shadow: 0 10px 40px rgba(0,0,0,0.5);
 
-  --shadow:   0 12px 32px rgba(0,0,0,0.4);
-
-  /* ✅ ADD missing fonts */
+  /* FONTS */
   --font-display: 'Poppins', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+  --font-body: 'Inter', sans-serif;
 }
 
 /* RESET */
-*, *::before, *::after {
-  box-sizing: border-box;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-/* BASE */
 body {
-  background: radial-gradient(circle at 20% 20%, #151726, #0b0c10);
+  background: var(--bg-gradient);
   color: var(--text);
-
   font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-
-  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-
-  overflow-x: hidden; /* ✅ prevent horizontal scroll */
 }
 
 /* HEADINGS */
-h1, h2, h3, h4, h5 {
+h1, h2, h3 {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
-  font-weight: 600;
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.1);
-  border-radius: 2px;
+/* ✨ GLASS CARD */
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
 }
 
-/* TEXT SELECTION */
-::selection {
-  background: rgba(124,156,255,0.25);
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.15);
 }
 
-/* BACKGROUND NOISE */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.15;
+/* 🎯 BUTTON */
+.btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* GLOBAL FIXES */
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* 🧭 SIDEBAR */
 .sidebar {
-  position: relative;
+  background: rgba(10,12,19,0.8);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border);
 }
 
-/* 📱 MOBILE RESPONSIVENESS */
+/* ACTIVE MENU */
+.sidebar .active {
+  background: linear-gradient(135deg, rgba(124,156,255,0.2), rgba(255,158,203,0.2));
+  border-radius: 10px;
+}
+
+/* ✨ HEADLINE GRADIENT TEXT */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 📊 CARDS GRID */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* 📱 MOBILE */
 @media (max-width: 768px) {
-
-  body {
-    font-size: 13px;
+  .cards {
+    grid-template-columns: 1fr;
   }
 
-  /* Page header */
-  .page-header {
-    padding: 12px;
+  .sidebar {
+    position: fixed;
+    left: -100%;
   }
 
-  .page-title {
-    font-size: 20px;
-  }
-
-  .page-sub {
-    font-size: 12px;
-  }
-
-  /* Buttons */
-  .btn,
-  .btn-sm {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Cards */
-  .card {
-    padding: 14px;
-  }
-
-  /* Inputs */
-  .input {
-    font-size: 14px;
-    padding: 10px;
+  .sidebar.open {
+    left: 0;
   }
 }
