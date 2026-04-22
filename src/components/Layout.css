@@ -158,6 +158,20 @@
   transition: all 0.18s;
 }
 .collapse-btn:hover { color: var(--text); border-color: var(--accent); }
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
 
 /* ── MAIN ── */
 .main-content {
@@ -193,6 +207,18 @@
   padding: 22px;
 }
 .card-sm { padding: 16px; }
+.card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167,139,250,0.3);
+}
 
 /* STAT CARDS */
 .stat-grid {
