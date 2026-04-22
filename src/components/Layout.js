@@ -6,11 +6,11 @@ import toast from 'react-hot-toast';
 import './Layout.css';
 
 const NAV = [
-  { to: '/',         icon: '⬡',  label: 'Dashboard' },
-  { to: '/live',     icon: '◉',  label: 'Live' },
-  { to: '/history',  icon: '▦',  label: 'History' },
-  { to: '/schedule', icon: '◷',  label: 'Schedule' },
-  { to: '/settings', icon: '◈',  label: 'Settings' },
+  { to: '/',         icon: '◈',  label: 'Dashboard'    },
+  { to: '/live',     icon: '⊕',  label: 'New Meeting'  },
+  { to: '/history',  icon: '◧',  label: 'History'      },
+  { to: '/schedule', icon: '◷',  label: 'Schedule'     },
+  { to: '/settings', icon: '◉',  label: 'Settings'     },
 ];
 
 export default function Layout() {
@@ -28,22 +28,23 @@ export default function Layout() {
     <div className="layout">
       <motion.aside
         className={`sidebar ${collapsed ? 'collapsed' : ''}`}
-        animate={{ width: collapsed ? 68 : 220 }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        animate={{ width: collapsed ? 68 : 224 }}
+        transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
       >
         {/* Logo */}
         <div className="sidebar-logo">
-          <div className="logo-icon">₿</div>
+          <div className="logo-icon">M</div>
           <AnimatePresence>
             {!collapsed && (
               <motion.div
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
+                exit={{ opacity: 0, x: -8 }}
+                transition={{ duration: 0.2 }}
                 className="logo-text"
               >
                 <span className="logo-name">MeetCost</span>
-                <span className="logo-sub">Cost Tracker</span>
+                <span className="logo-sub">cost tracker</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -65,6 +66,7 @@ export default function Layout() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
                     className="nav-label"
                   >
                     {label}
@@ -75,16 +77,19 @@ export default function Layout() {
           ))}
         </nav>
 
-        {/* User */}
+        {/* User footer */}
         <div className="sidebar-footer">
           <div className="user-pill">
-            <div className="user-avatar">{user?.name?.[0]?.toUpperCase()}</div>
+            <div className="user-avatar">
+              {user?.name?.[0]?.toUpperCase()}
+            </div>
             <AnimatePresence>
               {!collapsed && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
                   className="user-info"
                 >
                   <span className="user-name">{user?.name}</span>
@@ -93,24 +98,29 @@ export default function Layout() {
               )}
             </AnimatePresence>
           </div>
-          <button className="logout-btn" onClick={handleLogout} title="Logout">⇥</button>
+          <button className="logout-btn" onClick={handleLogout} title="Sign out">⇥</button>
         </div>
 
         {/* Collapse toggle */}
-        <button className="collapse-btn" onClick={() => setCollapsed(c => !c)}>
+        <button
+          className="collapse-btn"
+          onClick={() => setCollapsed(c => !c)}
+          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
           {collapsed ? '›' : '‹'}
         </button>
       </motion.aside>
 
+      {/* Main content */}
       <main className="main-content">
         <AnimatePresence mode="wait">
           <motion.div
             key={window.location.pathname}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
-            style={{ height: '100%' }}
+            transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+            style={{ height: '100%', position: 'relative', zIndex: 1 }}
           >
             <Outlet />
           </motion.div>
