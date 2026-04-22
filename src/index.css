@@ -122,5 +122,8 @@ body::before {
 }
 
 body {
-  border: 3px solid red;
+  overflow-x: hidden;
+}
+.sidebar {
+  position: relative;
 }
